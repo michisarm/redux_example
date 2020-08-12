@@ -7,6 +7,8 @@ class AddTodo extends Component {
     }
 
     handleChange = (e) => {
+        const { handleChangeBockground } = this.props;
+        handleChangeBockground(e.target.value);
         //Updating local component state
         this.setState({
             value: e.target.value
