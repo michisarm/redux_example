@@ -1,8 +1,5 @@
 import React, {useState, useEffect} from 'react';
-
-// const todoStyle = {
-//   color: 'aqua',
-// }
+import { connect } from 'react-redux';
 
 const TextTodo = ({
   value
@@ -27,4 +24,9 @@ const TextTodo = ({
   )
 };
 
-export default TextTodo;
+export default connect(
+  state => ({
+    isBackgroundColorChange: state.base.get('isBackgroundColorChange'),
+  }),
+  null,
+)(TextTodo);

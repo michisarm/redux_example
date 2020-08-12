@@ -24,8 +24,7 @@ class Todos extends Component {
                 value: "todo 3",
                 isDone: false
             }
-        ],
-        isBackgroundColorChange: false
+        ]
     }
 
     //Local helper method to get date
@@ -41,7 +40,6 @@ class Todos extends Component {
             return t.id !== todo
         });
         this.setState({ todos });
-        this.defaultBackgroundColor();
     }
 
     handleDone = todo => {
@@ -53,7 +51,6 @@ class Todos extends Component {
             return t;
         });
         this.setState({todos});
-        this.defaultBackgroundColor();
     }
 
     //method called from AddTodo component
@@ -68,24 +65,9 @@ class Todos extends Component {
                 }
             );
             this.setState({ addTodoValue: "", todos })
-            this.defaultBackgroundColor();
         } else {
             console.log("Please Add Todo Text");
         }
-    }
-
-    handleChangeBockground = (value) => {
-      let pattern_num = /[0-9]/;	// 숫자 
-      let pattern_eng = /[a-zA-Z]/;	// 문자 
-      if( !pattern_num.test(value) && pattern_eng.test(value)){
-        this.setState({isBackgroundColorChange: true});
-      }else {
-        this.setState({isBackgroundColorChange: false});
-      }
-    }
-
-    defaultBackgroundColor = () => {
-      this.setState({isBackgroundColorChange: false});
     }
 
     render() {
@@ -94,12 +76,12 @@ class Todos extends Component {
                 <tbody>
                     {this.state.todos.map((todo, index) => (
                         <tr key={todo.id}>
-                            <Todo isBackgroundColorChange={this.state.isBackgroundColorChange} index={index+1} todo={todo} fooDelete={this.handleDelete} fooDoneDone={this.handleDone} />
+                            <Todo index={index+1} todo={todo} fooDelete={this.handleDelete} fooDoneDone={this.handleDone} />
                         </tr>
                     ))}
                     <tr>
                         <td colSpan="4" className="text-center">
-                            <AddTodo handleChangeBockground={this.handleChangeBockground} fooAddTodo={this.addNewTodo} addTodoValue={this.state.addTodoValue} />
+                            <AddTodo fooAddTodo={this.addNewTodo} addTodoValue={this.state.addTodoValue} />
                         </td>
                     </tr>
                 </tbody>

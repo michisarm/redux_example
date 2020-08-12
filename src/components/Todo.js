@@ -39,7 +39,7 @@ class Todo extends Component {
           } else if( pattern_num.test(str)){
             return <NumberTodo value={str}/>
           } else {
-            return <TextTodo isBackgroundColorChange={this.props.isBackgroundColorChange} value={str} />
+            return <TextTodo value={str} />
           }
         }
     }

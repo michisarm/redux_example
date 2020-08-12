@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as baseActions from '../store/modules/base';
 
 class AddTodo extends Component {
     state = {
@@ -7,8 +10,15 @@ class AddTodo extends Component {
     }
 
     handleChange = (e) => {
-        const { handleChangeBockground } = this.props;
-        handleChangeBockground(e.target.value);
+        const { BaseActions } = this.props;
+        const value = e.target.value;
+        let pattern_num = /[0-9]/;	// 숫자 
+        let pattern_eng = /[a-zA-Z]/;	// 문자 
+        if( !pattern_num.test(value) && pattern_eng.test(value)){
+          BaseActions.showBackgroundColor();
+        }else {
+          BaseActions.hideBackgroundColor();
+        }
         //Updating local component state
         this.setState({
             value: e.target.value
@@ -47,4 +57,9 @@ class AddTodo extends Component {
     }
 }
 
-export default AddTodo;
+export default connect(
+  null,
+  dispatch => ({
+    BaseActions: bindActionCreators(baseActions, dispatch),
+  }),
+)(AddTodo);
