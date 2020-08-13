@@ -8,10 +8,9 @@ class AddTodo extends Component {
         defaultValue: "",
         value: this.props.addTodoValue
     }
-
-    handleChange = (e) => {
-        const { BaseActions } = this.props;
-        const value = e.target.value;
+    
+    handleChangeBackground = (value) =>{
+      const { BaseActions } = this.props;
         let pattern_num = /[0-9]/;	// 숫자 
         let pattern_eng = /[a-zA-Z]/;	// 문자 
         if( !pattern_num.test(value) && pattern_eng.test(value)){
@@ -19,6 +18,10 @@ class AddTodo extends Component {
         }else {
           BaseActions.hideBackgroundColor();
         }
+    }
+
+    handleChange = (e) => {
+        this.handleChangeBackground(e.target.value);
         //Updating local component state
         this.setState({
             value: e.target.value
@@ -37,6 +40,7 @@ class AddTodo extends Component {
         
         //Updating local component state
         this.setState({value:""});
+        this.handleChangeBackground("");
     }
 
     addTodo = () => {
