@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from '../store/modules/base';
+import * as testActions from '../store/modules/test';
 
 class AddTodo extends Component {
     state = {
@@ -44,6 +45,8 @@ class AddTodo extends Component {
     }
 
     addTodo = () => {
+        const { TestActions } = this.props;
+        TestActions.toastAction(this.state.value);
         //Call method reference in Todos component using props
         this.props.fooAddTodo(this.state.value);
         this.clearInput();
@@ -65,5 +68,6 @@ export default connect(
   null,
   dispatch => ({
     BaseActions: bindActionCreators(baseActions, dispatch),
+    TestActions: bindActionCreators(testActions, dispatch),
   }),
 )(AddTodo);
