@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux'
 
 const TextTodo = ({
   value
-  ,isBackgroundColorChange
 }) => {
   const [todoStyle, setTodoStyle] = useState({});
+  const isBackgroundColorChange = useSelector(state => state.base.get('isBackgroundColorChange'))
 
   useEffect(() => {
     let styled = {
@@ -24,9 +24,4 @@ const TextTodo = ({
   )
 };
 
-export default connect(
-  state => ({
-    isBackgroundColorChange: state.base.get('isBackgroundColorChange'),
-  }),
-  null,
-)(TextTodo);
+export default TextTodo;
